@@ -9,5 +9,6 @@ Langkah Installasi jalankan di command prompt / terminal:
 5. php artisan serve
 
 Untuk isi database silahkan import file pariwisata.sql pada folder /database.
+
 Untuk database kosong bisa langsung di migrate dengan command
 "php artisan migrate"
