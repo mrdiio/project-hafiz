@@ -14,17 +14,17 @@ class CreateReviewsTable extends Migration
     public function up()
     {
         Schema::create('reviews', function (Blueprint $table) {
-          $table->increments('id');
-          $table->string('name');
-          $table->string('email');
-          $table->text('message');
-          $table->tinyInteger('status')->default(0);
-          $table->tinyInteger('rate')->default(0);
-          $table->integer('panorama_id')->unsigned();
-          $table->timestamps();
+            $table->increments('id');
+            $table->string('name');
+            $table->string('email');
+            $table->text('message');
+            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('rate')->default(0);
+            $table->integer('panorama_id')->unsigned();
+            $table->timestamps();
 
-          $table->foreign('panorama_id')->references('id')->on('panoramas')
-              ->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('panorama_id')->references('id')->on('panoramas')
+                ->onUpdate('cascade')->onDelete('cascade');
         });
     }
 

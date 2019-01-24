@@ -29,4 +29,5 @@ Route::group(['middleware' => 'auth'], function(){
   Route::resource('review', 'AdminReviewController');
   Route::resource('/tentang','AdminTentangController');
   Route::resource('/artikeladmin','AdminArtikelController');
+  Route::resource('/eventadmin','AdminEventController');
 });
