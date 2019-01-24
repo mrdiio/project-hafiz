@@ -26,7 +26,7 @@
                 {{ session('alert') }}
               </div>
             </div>
-            @endif
+          @endif
 
             @if ($errors->count() > 0)
               <div class="box-body" id="alerterror">

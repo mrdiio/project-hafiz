@@ -14,3 +14,5 @@ Untuk database kosong bisa langsung di migrate dengan command
 "php artisan migrate"
 
 Tambahkan perintah "php artisan storage:link" untuk menghubungkan ke folder /public/storage
+
+https://colorlib.com/preview/theme/evento/#
