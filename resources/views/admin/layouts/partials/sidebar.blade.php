@@ -17,6 +17,11 @@
           <i class="fa fa-newspaper-o"></i> <span>Artikel</span>
         </a>
       </li>
+      <li class="{{ Request::is('eventadmin') ? 'active' : '' }}">
+        <a href="/eventadmin">
+          <i class="fa fa-calendar"></i> <span>Event</span>
+        </a>
+      </li>
       <li class="{{ Request::is('tentang') ? 'active' : '' }}">
         <a href="/tentang">
           <i class="fa fa-user"></i> <span>About</span>

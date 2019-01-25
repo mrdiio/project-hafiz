@@ -50,6 +50,7 @@ class AdminArtikelController extends Controller
       $artikel->judul = $request->judul;
       $artikel->slug = str_slug($request->judul);
       $artikel->isi = $request->isi;
+      // dd($request->isi);
 
       $artikel->save();
 
