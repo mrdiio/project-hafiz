@@ -28,15 +28,18 @@
             </div>
           @endif
 
-            @if ($errors->count() > 0)
+            {{-- @if ($errors->count() > 0)
               <div class="box-body" id="alerterror">
                 <div class="alert alert-danger alert-dismissible">
                   <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                   <h4><i class="icon fa fa-warning"></i> Alert!</h4>
                     Error update data!
+                    @foreach ($errors->all as $item)
+                      <li>{{$item}}</li>
+                    @endforeach
                 </div>
               </div>
-            @endif
+            @endif --}}
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
@@ -82,25 +85,71 @@
             <h4 class="modal-title">Tambah Data</h4>
           </div>
             <div class="box-body">
-              <form role="form" method="POST" action="/artikeladmin" enctype="multipart/form-data">
+              <form role="form" method="POST" action="/eventadmin" enctype="multipart/form-data">
               {{ csrf_field() }}
-              <div class="form-group{{ $errors->has('judul') ? ' has-error' : '' }}">
+              <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
                 <label>Judul</label>
-                <input type="text" class="form-control" placeholder="Ketik judul" name="judul" required autofocus>
+                <input type="text" class="form-control" placeholder="Ketik judul" name="title" autofocus>
               </div>
-              <div class="form-group {{ $errors->has('isi') ? ' has-error' : '' }}">
-                <label>Isi</label>
-                <textarea class="form-control" id="editor1" name="isi" rows="10" cols="80" required></textarea>
-                @if ($errors->has('isi'))
+
+              <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                <label>Lokasi</label>
+                <input type="text" class="form-control" placeholder="Ketik lokasi" name="location">
+              </div>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Tanggal:</label>
+                    <div class="input-group date">
+                      <input type="text" class="form-control pull-right" id="datepicker" name="date">
+                      <div class="input-group-addon">
+                        <i class="fa fa-calendar"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Mulai:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker" name="start_time">
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label>Selesai:</label>
+                    <div class="input-group">
+                      <input type="text" class="form-control timepicker" name="end_time">
+                      <div class="input-group-addon">
+                        <i class="fa fa-clock-o"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
+                <label>Deskripsi</label>
+                <textarea class="form-control" id="editor1" name="description" rows="10" cols="80"></textarea>
+                @if ($errors->has('description'))
                   <span class="help-block">
-                      <strong>{{ $errors->first('isi') }}</strong>
+                      <strong>{{ $errors->first('description') }}</strong>
                   </span>
                 @endif
               </div>
-              <div class="form-group{{ $errors->has('file') ? ' has-error' : '' }}">
+
+              <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
                 <label>Gambar</label>
-                <input type="file" class="form-control" name="file" required>
+                <input type="file" class="form-control" name="image" >
               </div>
+
             </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
@@ -112,3 +161,29 @@
     </div>
   </section>
 @endsection
+
+@push('css')
+  {{-- Date Time Picker --}}
+  <link rel="stylesheet" href="{{ asset('admin/bootstrap/css/bootstrap-timepicker.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/bootstrap/css/bootstrap-datepicker.min.css') }}">
+@endpush
+
+@push('js')
+  <!-- bootstrap date time picker -->
+  <script src=" {{ asset('admin/bootstrap/js/bootstrap-timepicker.min.js') }}"></script>
+  <script src=" {{ asset('admin/bootstrap/js/bootstrap-datepicker.min.js') }}"></script>
+
+  <script>
+    $(function() {
+      //Timepicker
+      $('.timepicker').timepicker({
+        showInputs: false
+      })
+      //Date picker
+      $('#datepicker').datepicker({
+        autoclose: true
+      })
+    })
+  </script>
+
+@endpush

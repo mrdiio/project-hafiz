@@ -14,8 +14,9 @@ class AdminEventController extends Controller
      */
     public function index()
     {
-      $event = Event::all();
-      return view ("admin/event",compact('event'));
+        //
+        $event = Event::all();
+        return view ("admin/event",compact('event'));
     }
 
     /**
@@ -36,24 +37,31 @@ class AdminEventController extends Controller
      */
     public function store(Request $request)
     {
-      $this->validate($request, [
-        'isi' => 'required',
-      ]);
+        $this->validate($request, [
+            'description' => 'required',
+        ]);
+        $event = new Event;
+        $event->title = $request->title;
+        $event->slug = str_slug($request->title);
+        $event->location = $request->location;
+        $event->date = date("Y/m/d", strtotime($request->date));
+        $event->start_time = date("H:i:s", strtotime($request->start_time));
+        $event->end_time = date("H:i:s", strtotime($request->end_time));
+        $event->description = $request->description;
+        $event->image = 'Image';
+        $event->status = 'aktif';
+        $event->save();
+        // dd($event->date);
 
-      $artikel = new Article;
-      if ($request->has('file')) {
-      $f = $request->file('file');
-      $filename = time().'.'.$f->getClientOriginalExtension();
-      $f->storeAs('public',$filename);
-      $artikel->file = $filename;
-      }
-      $artikel->judul = $request->judul;
-      $artikel->slug = str_slug($request->judul);
-      $artikel->isi = $request->isi;
+        if ($request->has('image')) {
+            $gambar = $request->file('image');
+            $filename = $event->id.'-'.$event->slug . '.' . $gambar->getClientOriginalExtension();
+            $gambar->storeAs('public/events/', $filename);
+            $event->image = $filename;
+        }
+        $event->save();
 
-      $artikel->save();
-
-      return redirect()->action('AdminArtikelController@index')->with('alert', 'Data berhasil ditambah!');
+        return redirect()->action('AdminEventController@index')->with('alert', 'Data berhasil ditambah!');
     }
 
     /**
@@ -87,24 +95,7 @@ class AdminEventController extends Controller
      */
     public function update(Request $request, $id)
     {
-      $this->validate($request, [
-        'isi' => 'required',
-      ]);
-      
-      $artikel = Article::find($id);
-      if ($request->has('file')) {
-      $f = $request->file('file');
-      $filename = time().'.'.$f->getClientOriginalExtension();
-      $f->storeAs('public',$filename);
-      $artikel->file = $filename;
-      }
-      $artikel->judul = $request->judul;
-      $artikel->slug = str_slug($request->judul);
-      $artikel->isi = $request->isi;
-
-      $artikel->save();
-
-      return redirect()->action('AdminArtikelController@index')->with('alert', 'Data berhasil dirubah!');
+        //
     }
 
     /**
@@ -115,9 +106,6 @@ class AdminEventController extends Controller
      */
     public function destroy($id)
     {
-      $artikel= Article::find($id);
-      \File::delete('storage/'.$artikel->file);
-      $artikel->delete();
-      return redirect()->action('AdminArtikelController@index')->with('alert', 'Data berhasil dihapus!');
+        //
     }
 }
