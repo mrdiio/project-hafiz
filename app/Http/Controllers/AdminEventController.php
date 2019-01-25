@@ -95,7 +95,31 @@ class AdminEventController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'description' => 'required',
+        ]);
+        $event = Event::find($id);
+        $event->title = $request->title;
+        // $event->slug = str_slug($request->title);
+        $event->location = $request->location;
+        $event->date = date("Y/m/d", strtotime($request->date));
+        $event->start_time = date("H:i:s", strtotime($request->start_time));
+        $event->end_time = date("H:i:s", strtotime($request->end_time));
+        $event->description = $request->description;
+        $event->image = 'Image';
+        $event->status = 'aktif';
+        $event->save();
+        // dd($event->date);
+
+        if ($request->has('image')) {
+            $gambar = $request->file('image');
+            $filename = $event->id.'-'.$event->slug . '.' . $gambar->getClientOriginalExtension();
+            $gambar->storeAs('public/events/', $filename);
+            $event->image = $filename;
+        }
+        $event->save();
+
+        return redirect()->action('AdminEventController@index')->with('alert', 'Data berhasil ditambah!');
     }
 
     /**
@@ -107,5 +131,9 @@ class AdminEventController extends Controller
     public function destroy($id)
     {
         //
+        $event = Event::find($id);
+        \File::delete('storage/events/'.$event->image);
+        $event->delete();
+        return redirect()->action('AdminEventController@index')->with('alert', 'Data berhasil ditambah!');
     }
 }

@@ -159,6 +159,127 @@
             </div>
         </div>
     </div>
+    {{-- /.modal-tambah --}}
+
+    <!-- Modal Edit -->
+    @foreach ($event as $edit)
+      <div class="modal fade" id="update{{$edit->id}}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Edit Data</h4>
+            </div>
+              <div class="box-body">
+                <form role="form" method="POST" action="/eventadmin/{{$edit->id}}" enctype="multipart/form-data">
+                  @method('PUT')
+                  @csrf
+                <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
+                  <label>Judul</label>
+                  <input type="text" class="form-control" placeholder="Ketik judul" name="title" value="{{$edit->title}}">
+                </div>
+
+                <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                  <label>Lokasi</label>
+                  <input type="text" class="form-control" placeholder="Ketik lokasi" name="location" value="{{$edit->location}}">
+                </div>
+
+                <div class="row">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Tanggal:</label>
+                      <div class="input-group date">
+                        <input type="text" class="form-control pull-right" id="edit-datepicker" name="date"
+                            value="{{ date("m/d/Y", strtotime($edit->date))}}">
+                        <div class="input-group-addon">
+                          <i class="fa fa-calendar"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Mulai:</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control edit-timepicker" name="start_time"
+                            value="{{date("h:i A", strtotime($edit->start_time))}} ">
+                        <div class="input-group-addon">
+                          <i class="fa fa-clock-o"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label>Selesai:</label>
+                      <div class="input-group">
+                        <input type="text" class="form-control edit-timepicker" name="end_time"
+                            value="{{date("h:i A", strtotime($edit->end_time))}}">
+                        <div class="input-group-addon">
+                          <i class="fa fa-clock-o"></i>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="form-group {{ $errors->has('description') ? ' has-error' : '' }}">
+                  <label>Deskripsi</label>
+                  <textarea class="form-control" id="editor1" name="description" rows="10" cols="80">
+                    {!! $edit->description !!}
+                  </textarea>
+                  @if ($errors->has('description'))
+                    <span class="help-block">
+                        <strong>{{ $errors->first('description') }}</strong>
+                    </span>
+                  @endif
+                </div>
+
+                <div class="form-group{{ $errors->has('image') ? ' has-error' : '' }}">
+                  <label>Gambar</label>
+                  <input type="file" class="form-control" name="image" >
+                </div>
+
+              </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                  <button type="submit" id="simpan" class="btn btn-primary">Simpan</button>
+                </div>
+                </form>
+              </div>
+          </div>
+      </div>
+    @endforeach
+    {{-- /.modal-edit --}}
+
+    {{-- Modal Hapus --}}
+    @foreach($event as $hapus)
+      <div class="modal fade" id="delete{{$hapus->id}}">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title">Hapus <b>{{$hapus->title}}</b></h4>
+            </div>
+            <form role="form" method="POST" action="/eventadmin/{{$hapus->id}}">
+              {{method_field('DELETE')}}
+              {{ csrf_field() }}
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+              <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    @endforeach
+    {{-- /.modal-hapus --}}
+
+
   </section>
 @endsection
 
@@ -179,8 +300,13 @@
       $('.timepicker').timepicker({
         showInputs: false
       })
+      $('.edit-timepicker').timepicker({
+        showInputs: false,
+        defaultTime: ''
+      })
+
       //Date picker
-      $('#datepicker').datepicker({
+      $('#datepicker, #edit-datepicker').datepicker({
         autoclose: true
       })
     })
