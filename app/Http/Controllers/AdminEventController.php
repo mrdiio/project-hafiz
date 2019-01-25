@@ -119,7 +119,7 @@ class AdminEventController extends Controller
         }
         $event->save();
 
-        return redirect()->action('AdminEventController@index')->with('alert', 'Data berhasil ditambah!');
+        return redirect()->action('AdminEventController@index')->with('alert', 'Data berhasil diubah!');
     }
 
     /**
@@ -134,6 +134,6 @@ class AdminEventController extends Controller
         $event = Event::find($id);
         \File::delete('storage/events/'.$event->image);
         $event->delete();
-        return redirect()->action('AdminEventController@index')->with('alert', 'Data berhasil ditambah!');
+        return redirect()->action('AdminEventController@index')->with('alert', 'Data berhasil dihapus!');
     }
 }

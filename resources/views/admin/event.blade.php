@@ -266,8 +266,8 @@
               <h4 class="modal-title">Hapus <b>{{$hapus->title}}</b></h4>
             </div>
             <form role="form" method="POST" action="/eventadmin/{{$hapus->id}}">
-              {{method_field('DELETE')}}
-              {{ csrf_field() }}
+              @method('DELETE')
+              @csrf
             <div class="modal-footer">
               <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
               <button type="submit" class="btn btn-primary">Delete</button>
