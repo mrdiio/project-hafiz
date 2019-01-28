@@ -1,6 +1,8 @@
 @extends('layouts.appFt')
 
 @section('content')
+<div id="container">
+  </div>
 <div class="row">
   <h1 class="header center blue-text">{{$event->title}}</h1>
 
@@ -55,3 +57,11 @@
   <br><br><br><br><br><br><br><br>
 </div> -->
 @endsection
+
+@push('css')
+  <script src="//platform-api.sharethis.com/js/sharethis.js#property=5b4a9a1a77b646001224122f&product=sticky-share-buttons"></script>
+@endpush
+
+@push('js')
+
+@endpush
