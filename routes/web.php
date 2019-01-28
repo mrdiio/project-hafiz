@@ -14,6 +14,7 @@
 Route::get('/', 'WelcomeController@index');
 Route::get('/artikel', 'ArticleController@index');
 Route::get('/artikel/{slug}', 'ArticleController@show');
+Route::resource('/event', 'EventController');
 Route::get('/about', 'AboutController@index');
 Route::put('/panorama/{slug}', 'WelcomeController@update');
 Route::get('/panorama/{slug}', 'WelcomeController@show');

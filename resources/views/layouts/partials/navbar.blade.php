@@ -11,6 +11,7 @@
           <!--tambah halaman artikel  -->
           <li class="{{ Request::is('/artikel') ? 'active' : '' }}"><a href="/artikel">Artikel</a></li>
           <!-- /artikel -->
+          <li class="{{ Request::is('/event') ? 'active' : '' }}"><a href="/event">Event</a></li>
           <li class="{{ Request::is('/about') ? 'active' : '' }}"><a href="/about">Tentang</a></li>
           <!-- Dropdown Trigger -->
           <li><a class="dropdown-trigger" href="#!" data-target="dropdown1">Terjemahkan<i class="material-icons right">arrow_drop_down</i></a></li>

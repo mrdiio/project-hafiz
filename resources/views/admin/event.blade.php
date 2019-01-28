@@ -102,7 +102,8 @@
                   <div class="form-group">
                     <label>Tanggal:</label>
                     <div class="input-group date">
-                      <input type="text" class="form-control pull-right" id="datepicker" name="date">
+                      <input type="text" class="form-control pull-right" id="datepicker" name="date"
+                          value="{{ date('m/d/Y') }} ">
                       <div class="input-group-addon">
                         <i class="fa fa-calendar"></i>
                       </div>
