@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Event;
 
 class AdminEventController extends Controller
@@ -52,6 +53,8 @@ class AdminEventController extends Controller
         $event->status = 'aktif';
         $event->save();
         // dd($event->date);
+
+        Storage::makeDirectory('public/events');
 
         if ($request->has('image')) {
             $gambar = $request->file('image');
