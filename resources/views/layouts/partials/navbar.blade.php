@@ -26,6 +26,7 @@
     <ul id="nav-mobile" class="sidenav">
       <<li class="{{ Request::is('/') ? 'active' : '' }}"><a href="/">Beranda</a></li>
       <li class="{{ Request::is('/artikel') ? 'active' : '' }}"><a href="/artikel">Artikel</a></li>
+      <li class="{{ Request::is('/event') ? 'active' : '' }}"><a href="/event">Event</a></li>
       <li class="{{ Request::is('/about') ? 'active' : '' }}"><a href="/about">Tentang</a></li>
       <!-- Dropdown Trigger -->
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown2">Terjemahkan<i class="material-icons right">arrow_drop_down</i></a></li>
