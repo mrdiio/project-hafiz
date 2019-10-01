@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.6
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Jan 02, 2019 at 02:37 AM
--- Server version: 10.1.37-MariaDB
--- PHP Version: 7.0.32
+-- Host: 127.0.0.1
+-- Generation Time: Sep 25, 2019 at 04:58 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -17,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ayu_pariwisata`
+-- Database: `pariwisata`
 --
 
 -- --------------------------------------------------------
@@ -69,6 +71,27 @@ INSERT INTO `articles` (`id`, `judul`, `slug`, `isi`, `file`, `created_at`, `upd
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `events`
+--
+
+CREATE TABLE `events` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `title` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `slug` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `location` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `date` date NOT NULL,
+  `start_time` time DEFAULT NULL,
+  `end_time` time DEFAULT NULL,
+  `description` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `image` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `migrations`
 --
 
@@ -87,7 +110,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2014_10_12_100000_create_password_resets_table', 1),
 (4, '2018_06_28_041823_create_panoramas_table', 2),
 (5, '2018_06_29_064125_create_abouts_table', 3),
-(6, '2018_10_29_162955_create_reviews_table', 4);
+(6, '2018_10_29_162955_create_reviews_table', 4),
+(7, '2019_01_24_104020_create_events_table', 5);
 
 -- --------------------------------------------------------
 
@@ -112,8 +136,8 @@ CREATE TABLE `panoramas` (
 --
 
 INSERT INTO `panoramas` (`id`, `nama`, `slug`, `thumbnail`, `deskripsi`, `panorama`, `maps`, `created_at`, `updated_at`) VALUES
-(1, 'Istana Kadariah', 'istana-kadariah', '15302788461.jpg', '<p>Keraton Kadariah&nbsp;adalah istana&nbsp;Kesultanan Pontianak&nbsp;yang dibangun pada dari tahun 1771 sampai 1778 masehi. Sayyid Syarif Abdurrahman Alkadri adalah sultan pertama yang mendiami istana tersebut. Keraton ini berada di dekat pusat&nbsp;Kota Pontianak,&nbsp;Kalimantan Barat. Sebagai cikal-bakal lahirnya Kota Pontianak, Keraton Kadariah menjadi salah satu objek wisata sejarah. Dalam perkembanganya, keraton ini terus mengalami proses renovasi dan rekrontuksi hingga menjadi bentuk yang sekarang ini.</p>\r\n\r\n<p>Keberadan keraton Kadariah tidak lepas dari sosok Sayyid Syarif Abdurrahman Alkadrie (1738-1808M), yang masa mudanya telah mengunjungi berbagai daerah di Nusantara dan melakukan kontak dagang dari para Saudagar di berbagai Negara. Ketika Habib Husein Alkadrie, yang pernah menjadi Hakim agama kerajaan Matan dan ulama terkemuka di Kerajaan Mempawah, wafat pada tahun 1770M, Syarif Abdurrahman beserta keluarganya memutuskan untuk mencari daerah pemukiman baru. sampai pada tanggal 23 oktober 1771M (24 Rajab 1181H), mereka tiba di daerah dekat pertemuan tiga sungai, yaitu sungai Landak, Sungai Kapuas kecil dan Sungai Kapuas. mereka memutuskan untuk menetap didaerah tersebut.</p>\r\n\r\n<p>Secara historis Keraton Kadariah mulai dibangun pada tahun 1771M dan baru selesai pada tahun 1778M. Tak lama setelah Keraton selesai dibangun Sayyid Syarif Abdurrahman Alkadri di nobatkan sebagai sultan pertama Kesultanan Pontianak. Dalam perkembanganya, keraton ini terus mengalami proses renovasi dan rekonstruksi hingga menjadi bentuk yang sekarang ini</p>\r\n\r\n<p>(sumber : id.wikipedia.org)</p>', '15302788462.jpg', '<p>https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8178130790443!2d109.34771141415199!3d-0.028892035553493272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d58492226606b%3A0x30190f6309dc377c!2sKeraton+Kadriyah+Pontianak!5e0!3m2!1sen!2sid!4v1530278112201</p>', '2018-06-29 06:27:26', '2018-11-02 10:05:11'),
-(3, 'Rumah Adat Melayu', 'rumah-adat-melayu', '15303605801.jpg', 'Rumah Adat Melayu Kalimantan Barat (Kalbar) ini terletak Komplek Perkampungan Budaya, Jalan Sutan Syahrir Kota Pontianak.Secara historis, pembangunan Rumah Adat Melayu ini dimulai dengan penancapan tiang pertama pada tanggal 17 Mei 2003 hingga selesai dibangun pada tahun 2005.Selanjutnya, pada tanggal 9 November 2005Rumah Adat Melayu Kalbar diresmikan oleh Wakil Presiden RI Jusuf Kalla.Sejak diresmikan, bangunan berdiri diatas lahan seluas 1,4 Hektarini menjadi pusat/tempat diselenggarakannya berbagai kegiatan, resepsi pernikahan maupun salah satu destinasi kunjungan wisatawan lokal maupun mancanegara.Hakikat rumah/ruang balai adalah tempat melakukan kegiatan bermasyarakat dan kegiatan sosial, termasuk tempat mengadakan musyawarah dan sebagainya.Ungkapan diatas memberi petunjuk, bahwa rumah/ruang balai melambangkan falsafah hidup gotong royong, senasib sepenanggungan dan kesetiakawanan sosial pada masyarakat Melayu,\"Adat dijunjung, budaya disanjung\".Rumah Adat Melayu juga berfungsi sebagai tempat musyawarah Majelis Adat Budaya Melayu (MABM) yang berperan dalam menyelenggarakan berbagi event budaya Melayu di Kalbar, satu diantaranya adalah Festival Seni Budaya Melayu.\r\nSeni arsitektur dan tipologi rumah tradisional Melayu adalah rumah panggung atau berkolong, dan memiliki tiang-tiang tinggi.Hal ini sesuai dengan iklim setempat serta kebiasaan yang sudah turun menurun.Tinggi tiang penyangga rumah sekitar dua sampai dengan dua setengah meter. Suasana didalam ruangan sejuk dan segarkarena banyak memiliki jendela serta lubang angin (ventilasi). Berdasarkan bentuk atapnya, Rumah Adat Melayu Kalbar memiliki bentuk atap lipat kajang (rumah dengan atap curam) yang berbentuk segitiga dengan tinggi kira-kira 30 derajat, memiliki fungsi untuk menyaring udara panas agar tidak terperangkap di dalam ruangan rumah tersebut. Posisi bangunan ini tegak lurus menghadap jalan raya yang disebut dengan Rumah Perabung Melintang.Selain itu di bagian bawah terdapat kolong yang cukup tinggi.Khusus untuk ornamen bangunan ini merupakan perpaduan dari ornamen-ornamen dari keraton-keraton yang ada di Kalimantan Barat. Keindahan kawasan Rumah Adat Melayu semakin elok dengan adanya taman yang dihiasi dengan bunga yang tertata rapi. Tak sebatas itu saja, bangunan ini dihiasi dengan adanya air mancur yang indah dan bersih.\r\n\r\n(sumber : pontinesia.com)', '15303605802.jpg', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8170334584142!2d109.31861811415209!3d-0.046018335542045444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d590fbbadc72d%3A0x995b3597f75b1ce2!2sRumah+Adat+Melayu!5e0!3m2!1sen!2sid!4v1530360541857', '2018-06-30 05:09:40', '2018-07-17 06:18:45'),
+(1, 'Istana Kadariah', 'istana-kadariah', '15693799921.jpg', '<p>Keraton Kadariah&nbsp;adalah istana&nbsp;Kesultanan Pontianak&nbsp;yang dibangun pada dari tahun 1771 sampai 1778 masehi. Sayyid Syarif Abdurrahman Alkadri adalah sultan pertama yang mendiami istana tersebut. Keraton ini berada di dekat pusat&nbsp;Kota Pontianak,&nbsp;Kalimantan Barat. Sebagai cikal-bakal lahirnya Kota Pontianak, Keraton Kadariah menjadi salah satu objek wisata sejarah. Dalam perkembanganya, keraton ini terus mengalami proses renovasi dan rekrontuksi hingga menjadi bentuk yang sekarang ini.</p>\r\n\r\n<p>Keberadan keraton Kadariah tidak lepas dari sosok Sayyid Syarif Abdurrahman Alkadrie (1738-1808M), yang masa mudanya telah mengunjungi berbagai daerah di Nusantara dan melakukan kontak dagang dari para Saudagar di berbagai Negara. Ketika Habib Husein Alkadrie, yang pernah menjadi Hakim agama kerajaan Matan dan ulama terkemuka di Kerajaan Mempawah, wafat pada tahun 1770M, Syarif Abdurrahman beserta keluarganya memutuskan untuk mencari daerah pemukiman baru. sampai pada tanggal 23 oktober 1771M (24 Rajab 1181H), mereka tiba di daerah dekat pertemuan tiga sungai, yaitu sungai Landak, Sungai Kapuas kecil dan Sungai Kapuas. mereka memutuskan untuk menetap didaerah tersebut.</p>\r\n\r\n<p>Secara historis Keraton Kadariah mulai dibangun pada tahun 1771M dan baru selesai pada tahun 1778M. Tak lama setelah Keraton selesai dibangun Sayyid Syarif Abdurrahman Alkadri di nobatkan sebagai sultan pertama Kesultanan Pontianak. Dalam perkembanganya, keraton ini terus mengalami proses renovasi dan rekonstruksi hingga menjadi bentuk yang sekarang ini</p>\r\n\r\n<p>(sumber : id.wikipedia.org)</p>', '15693799922.jpg', '<p>https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8178130790443!2d109.34771141415199!3d-0.028892035553493272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d58492226606b%3A0x30190f6309dc377c!2sKeraton+Kadriyah+Pontianak!5e0!3m2!1sen!2sid!4v1530278112201</p>', '2018-06-29 06:27:26', '2019-09-25 02:53:12'),
+(3, 'Rumah Adat Melayu', 'rumah-adat-melayu', '15693800861.jpg', '<p>Rumah Adat Melayu Kalimantan Barat (Kalbar) ini terletak Komplek Perkampungan Budaya, Jalan Sutan Syahrir Kota Pontianak.Secara historis, pembangunan Rumah Adat Melayu ini dimulai dengan penancapan tiang pertama pada tanggal 17 Mei 2003 hingga selesai dibangun pada tahun 2005.Selanjutnya, pada tanggal 9 November 2005Rumah Adat Melayu Kalbar diresmikan oleh Wakil Presiden RI Jusuf Kalla.Sejak diresmikan, bangunan berdiri diatas lahan seluas 1,4 Hektarini menjadi pusat/tempat diselenggarakannya berbagai kegiatan, resepsi pernikahan maupun salah satu destinasi kunjungan wisatawan lokal maupun mancanegara.Hakikat rumah/ruang balai adalah tempat melakukan kegiatan bermasyarakat dan kegiatan sosial, termasuk tempat mengadakan musyawarah dan sebagainya.Ungkapan diatas memberi petunjuk, bahwa rumah/ruang balai melambangkan falsafah hidup gotong royong, senasib sepenanggungan dan kesetiakawanan sosial pada masyarakat Melayu,&quot;Adat dijunjung, budaya disanjung&quot;.Rumah Adat Melayu juga berfungsi sebagai tempat musyawarah Majelis Adat Budaya Melayu (MABM) yang berperan dalam menyelenggarakan berbagi event budaya Melayu di Kalbar, satu diantaranya adalah Festival Seni Budaya Melayu. Seni arsitektur dan tipologi rumah tradisional Melayu adalah rumah panggung atau berkolong, dan memiliki tiang-tiang tinggi.Hal ini sesuai dengan iklim setempat serta kebiasaan yang sudah turun menurun.Tinggi tiang penyangga rumah sekitar dua sampai dengan dua setengah meter. Suasana didalam ruangan sejuk dan segarkarena banyak memiliki jendela serta lubang angin (ventilasi). Berdasarkan bentuk atapnya, Rumah Adat Melayu Kalbar memiliki bentuk atap lipat kajang (rumah dengan atap curam) yang berbentuk segitiga dengan tinggi kira-kira 30 derajat, memiliki fungsi untuk menyaring udara panas agar tidak terperangkap di dalam ruangan rumah tersebut. Posisi bangunan ini tegak lurus menghadap jalan raya yang disebut dengan Rumah Perabung Melintang.Selain itu di bagian bawah terdapat kolong yang cukup tinggi.Khusus untuk ornamen bangunan ini merupakan perpaduan dari ornamen-ornamen dari keraton-keraton yang ada di Kalimantan Barat. Keindahan kawasan Rumah Adat Melayu semakin elok dengan adanya taman yang dihiasi dengan bunga yang tertata rapi. Tak sebatas itu saja, bangunan ini dihiasi dengan adanya air mancur yang indah dan bersih. (sumber : pontinesia.com)</p>', '15693800862.jpg', '<p>https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8170334584142!2d109.31861811415209!3d-0.046018335542045444!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d590fbbadc72d%3A0x995b3597f75b1ce2!2sRumah+Adat+Melayu!5e0!3m2!1sen!2sid!4v1530360541857</p>', '2018-06-30 05:09:40', '2019-09-25 02:54:46'),
 (5, 'Rumah Adat Radakng Dayak', 'rumah-adat-radakng-dayak', '15304180851.jpg', 'Rumah Radank adalah sebutan untuk rumah panjang suku Dayak Kanayatn di provinsi Kalimantan Barat.\r\nDi Kalimantan Barat mulai dari Kota Pontianak dapat kita jumpai replika rumah adat Dayak. Salah satunya berada di jalan Letjen Sutoyo. Walaupun hanya sebuah Imitasi, tetapi rumah Betang ini, cukup aktif dalam menampung aktivitas kaum muda dan sanggar seni Dayak. kemudian jika kita ke Arah Kabupaten Landak, maka kita akan menjumpai sebuah Rumah Betang Dayak di Kampung Sahapm Kec. Pahauman. Kemudian jika kita ke Kabupaten Sanggau, maka kita dapat melihat Rumah Betang di kampung Kopar Kecamatan Parindu, Kemudian selanjutnya jika kita ke kabupaten Sekadau, maka kita dapat melihat rumah betang di Kampung Sungai Antu Hulu, Kecamatan Belitang Hulu, Kemudian di kabupaten Sintang kita Dapat melihat rumah Betang di Desa Ensaid panjang, Kecamatan Kelam, Kemudian Di Kapuas Hulu, Kita juga dapat melihat Masih banyak rumah-rumah betang Dayak yang masih lestari.\r\n\r\n(sumber : id.wikipedia.org)', '15304180852.jpg', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8169478854247!2d109.31699371415215!3d-0.04752373554106774!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d590e266b7c1b%3A0x2a54516a1a09626b!2sRumah+Adat+Radakng+Dayak+Kalimantan+Barat!5e0!3m2!1sen!2sid!4v1530418071653', '2018-06-30 21:08:05', '2018-07-17 06:49:55'),
 (6, 'Pelabuhan Senghie', 'pelabuhan-senghie', '15304183041.jpg', 'Pelabuhan ini merupakan pelabuhan rakyat pertama dan tertua yang berada di Kota Pontianak. Letaknya sangat strategis berhadapan dengan Sungai Kapuas dan dibelakangnya dekat dengan jalan Tanjungpura.\r\nNama pelabuhan ini di ambil dari seseorang pengusaha keturunan Cina bernama Than Seng Hie. Ia merupakan  pengusaha besar di bidang hasil bumi. Pada beberapa dekade ia membuka usaha di sekitar daerah ini. Namun disekitar tahun 1930-an usaha yang dibangunnya mengalami kemunduran. Sehingga ia terpaksa menjual tanahnya kepada pihak keuskupan, yang diperkirakan pada masa kepemimpinan Uskup Mosieur Pasisficus Bosch.\r\nPelabuhan Seng Hie ini memang tempat bongkat muat kapal-kapal barang. Ikan asin itu salah satu barang dagangan utama di sini. Makanya baunya tercium ke mana-mana. Berkarung-karung ikan asin, dikirim dari berbagai tempat di pelosok Kalimantan Barat. Selain ikan asin, ikan basah, sawit, dan karet juga biasa terlihat di seputaran Seng Hie.\r\nSelain kapal barang, banyak juga kapal penumpang yang merapat di sini. Ada yang rutenya jauh, sedang, dan dekat. Yang jauh itu contohnya Pontianak-Pulau Maya. Waktu tempuhnya kira-kira 12 jam. Kapal jarak jauh seperti ini, biasanya hanya jalan 1 minggu 2 kali saja.\r\nKalau kapal kecil jarak dekat atau klotok, jalan setiap saat. Rutenya hanya menyeberangi sungai Kapuas dari Seng Hie ke daerah Keraton Kadriah dan Mesjid Sultan Syarief Abdurrahman, Pontianak. Ongkosnya seribu rupiah saja. Satu klotok bisa mengangkut 10 penumpang.\r\n\r\n(sumber : wisatapontianak.com)', '15304183042.jpg', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.8178111951634!2d109.34378831415206!3d-0.02894563555346143!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d584efbe00199%3A0x9aa641086f2de072!2zUGVsYWJ1aGFuIFNlbmcgSGllIOaIkOWWnOa4rw!5e0!3m2!1sen!2sid!4v1530418292525', '2018-06-30 21:11:44', '2018-07-17 06:48:26'),
 (7, 'Mesjid Jami\'', 'mesjid-jami', '15317975051.jpeg', 'Masjid Jami\' Pontianak atau dikenal juga dengan nama Masjid Sultan Syarif Abdurrahman adalah masjid tertua dan terbesar di Kota Pontianak, Provinsi Kalimantan Barat, Indonesia.Masjid ini merupakan satu dari dua bangunan yang menjadi pertanda berdirinya Kota Pontianak pada 1771 Masehi, selain Keraton Kadriyah.\r\n\r\nPendiri masjid sekaligus pendiri Kota Pontianak adalah Syarif Abdurrahman Alkadrie. Ia seorang keturunan Arab, anak Al Habib Husein, seorang penyebar agama Islam dari Jawa. Al Habib Husein datang ke Kerajaan Matan pada 1733 Masehi. Al Habib Husein menikah dengan putri Raja Matan (kini Kabupaten Ketapang) Sultan Kamaludin, bernama Nyai Tua. Dari pernikahan itu lahirlah Syarif Abdurrahman Alkadrie, yang meneruskan jejak ayahnya menyiarkan agama Islam.\r\n\r\nSyarif Abdurrahman melakukan perjalanan dari Mempawah dengan menyusuri sungai Kapuas. Ikut dalam rombongannya sejumlah orang yang menumpang 14 perahu. Rombongan Abdurrahman sampai di muara persimpangan Sungai Kapuas dan Sungai Landak pada 23 Oktober 1771. Kemudian mereka membuka dan menebas hutan di dekat muara itu untuk dijadikan daerah permukiman baru. Abdurrahman mendirikan sebuah kerajaan baru Pontianak. Ia pun membangun masjid dan istana untuk sultan.\r\n\r\nMasjid yang dibangun aslinya beratap rumbia dan konstruksinya dari kayu. Syarif Abdurrahman meninggal pada 1808 Masehi. Ia memiliki putera bernama Syarif Usman. Saat ayahnya meninggal, Syarif Usman masih berusia kanak-kanak, sehingga belum bisa meneruskan pemerintahan almarhum ayahnya. Maka pemerintahan sementara dipegang adik Syarif Abdurrahman, bernama Syarif Kasim. Setelah Syarif Usman dewasa, dia menggantikan pamannya sebagai Sultan Pontianak, pada 1822 sampai dengan 1855 Masehi. Pembangunan masjid kemudian dilanjutkan Syarif Usman, dan dinamakan sebagai Masjid Abdurrahman, sebagai penghormatan dan untuk mengenang jasa-jasa ayahnya.\r\n\r\nBeberapa ulama terkenal pernah mengajarkan agama Islam di masjid Jami\' Sultan Abdurrahman. Mereka di antaranya Muhammad al-Kadri, Habib Abdullah Zawawi, Syekh Zawawi, Syekh Madani, H. Ismail Jabbar, dan H. Ismail Kelantan.\r\n\r\nMasjid Jami\' Pontianak dapat menampung sekitar 1.500 jamaah salat. Masjid akan penuh terisi jamaah salat, saat waktu salat Jumat dan tarawih Ramadan. Pada sisi kiri pintu masuk masjid, terdapat pasar ikan tradisional. Di belakangnya merupakan permukiman padat penduduk Kampung Beting, kelurahan Dalam Bugis dan di bagian depan masjid, yang juga menghadap ke barat, terbentang Sungai Kapuas.\r\n\r\n(sumber : id.wikipedia.org)', '15317975052.jpg', 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3989.8178702846208!2d109.3467956!3d-0.0272142!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d584f5a3bb62f%3A0xe5b9581a0a811153!2sJami\'+Mosque+Kadriyah+Palace!5e0!3m2!1sen!2sid!4v1531801158357', '2018-07-17 07:18:25', '2018-07-17 08:54:29'),
@@ -151,8 +175,8 @@ CREATE TABLE `reviews` (
   `name` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `message` text COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` tinyint(4) NOT NULL DEFAULT '0',
-  `rate` tinyint(4) NOT NULL DEFAULT '0',
+  `status` tinyint(4) NOT NULL DEFAULT 0,
+  `rate` tinyint(4) NOT NULL DEFAULT 0,
   `panorama_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -187,7 +211,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin Wisata', 'admin@gmail.com', '$2y$10$CzxcuqClaSu.IvEi0FnK1.DdK8ku/LqGSCL1IwoYmaWoSW2xz70JK', 'i92NwnAkKTqCxxXKT4TYoS0txTUFwDRdGU2P0GQpoKMHROvkXbJwWe40lpOf', '2018-06-24 18:20:48', '2018-06-24 18:20:48');
+(1, 'Admin Wisata', 'admin@gmail.com', '$2y$12$DdO74JafCbpQB3DmBgDWT.oDB4VTHd3hLJbqNhfxQ1odP.mLZlrba', 'i92NwnAkKTqCxxXKT4TYoS0txTUFwDRdGU2P0GQpoKMHROvkXbJwWe40lpOf', '2018-06-24 18:20:48', '2018-06-24 18:20:48');
 
 --
 -- Indexes for dumped tables
@@ -204,6 +228,14 @@ ALTER TABLE `abouts`
 --
 ALTER TABLE `articles`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `events`
+--
+ALTER TABLE `events`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `events_title_unique` (`title`),
+  ADD UNIQUE KEY `events_slug_unique` (`slug`);
 
 --
 -- Indexes for table `migrations`
@@ -246,31 +278,43 @@ ALTER TABLE `users`
 --
 ALTER TABLE `abouts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- AUTO_INCREMENT for table `articles`
 --
 ALTER TABLE `articles`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `events`
+--
+ALTER TABLE `events`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
 --
 -- AUTO_INCREMENT for table `panoramas`
 --
 ALTER TABLE `panoramas`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
 --
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
 --
 -- Constraints for dumped tables
 --
@@ -280,6 +324,7 @@ ALTER TABLE `users`
 --
 ALTER TABLE `reviews`
   ADD CONSTRAINT `reviews_panorama_id_foreign` FOREIGN KEY (`panorama_id`) REFERENCES `panoramas` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
